@@ -1,0 +1,117 @@
+--
+    Eis algumas ideais de como implementar o jogo da velha em Javascript.
+
+    Assim como está no .html modelo, podemos dividir a área de jogo em 9 espaços.
+
+        DIA_P    COL_1     COL_2    COL_3    DIA_S
+                        |         |
+        ROW_A    A1     |   A2    |   A3
+                --------|---------|---------
+                        |         |
+        ROW_B    B1     |   B2    |   B3
+                --------|---------|---------
+                        |         |
+        ROW_C    C1     |   C2    |   C3
+
+    Cada célula pode ter 3 situações: 'X', círculo ou vazia.
+    Podemos representar cada célula por uma váriavel, como:
+
+        var A1 = 0;
+
+    Para cada um dos 3 estados, sugiro usar os seguintes valores:
+    1 para círculo; -1 para X; 0 para vazia.
+
+    No começo do jogo, todas as células tem valor 0 e podem ser clicadas.
+    Quando é clicada, seu valor muda para 1 ou -1, dependendo de qual turno é.
+    Poderíamos fazer algo do tipo:
+
+        > onclick(Ax):
+        >   if (Ax == 0)  /** Só é clicável se estiver vazia **/
+        >       Ax = 1;
+        >       Imagem de fundo = círculo;
+        >   else
+        >       Fazer nada;
+
+    Toda vez que uma célula é alterada, atualizamos o estado do jogo.
+    Para um jogador ganhar, precisa preencher completamente uma linha
+    ou uma coluna ou uma diagonal.
+
+    No caso do jogador círculo preencher a linha A, nota-se que a soma
+    das variáveis referentes à linha será igual:
+
+        ROW_A == A1 + A2 + A3 == 3
+
+    No caso do jogador de X, a soma será -3.
+
+    Assim, toda vez que uma célula é preenchida, verificamos se a coluna,
+    linha e diagonal relevantes têm soma igual a 3 ou -3.
+
+    Os jogadores de círculo e 'X' alternam-se a cada clique. Como só há dois,
+    podemos armazenar a informação do jogador atual em uma booleana:
+
+        var player = 0; /** Se 0, círculo. Se 1, 'X'. **/
+
+    No final de cada atualização, simplesmente trocamos o valor. Não sei se
+    Javascript tem alguma forma de fazer negação de bit, mas imagino que sim.
+
+    Usando essa variável, podemos criar um algoritmo padrão, que cobre os casos
+    de círculo e os de 'X'. Temos, então, esta fórmula:
+
+        valor = [player * (-2)] + 1;
+        /** Se player == 0, valor == 1. Se player == 1, valor == -1. **/
+
+    Atualizando o código inicial, agora com a fórmula:
+
+        > onclick(Ax):
+        >   if (Ax == 0)
+        >
+        >       Ax = player * (-2) + 1;
+        >       if (Ax == 1)
+        >           Imagem de fundo = círculo;
+        >       else
+        >           Imagem de fundo = X;
+        >       player = !player;
+        >
+        >   else
+        >       Fazer nada;
+
+    Chegamos ao fim do jogo caso haja vitória ou todas as células sejam
+    preenchidas. Teremos, então, uma váriavel contadora que aumenta a cada
+    turno, declarada no começo.
+
+        var turnos = 1;
+
+    Então, além de verificarmos se houve vitória, também verificamos se o
+    contador chegou a 9.
+
+    Quando o jogo chega ao final, ele permanece nesse estado até o botão
+    "Resetar" seja apertado. Para controlar isso, usamos uma váriavel booleana
+    para paralisar o gráfico.
+
+        var jogo_ligado = 1; /** Se for 0, nenhuma célula é clicável **/
+
+    Então, revisando o código anterior:
+
+        > /** Loop básico **/
+        > onclick(Ax):
+        >   if (Ax == 0 && jogo_ligado == 1) /** Adicionamos mais uma condição **/
+        >
+        >       Ax = player * (-2) + 1;
+        >       if (Ax == 1)
+        >           Imagem de fundo = círculo;
+        >       else
+        >           Imagem de fundo = X;
+        >       player = !player;
+        >       turnos++;
+        >
+        >       if (Vitória || turnos == 9) /** Não lembro se precisamos printar **/
+        >           jogo_ligado = 0;        /** algo em caso de vitória.         **/          
+        >
+        >   else
+        >       Fazer nada;
+
+    Quanto ao botão de "Resetar", quando apertado, reseta todas as células para 0,
+    apaga todas as imagens, reseta turnos para 1, reseta player para 0 e reseta
+    jogo_ligado para 1. Usaríamos a mesma função "onclick" para implementar isso.
+
+--
