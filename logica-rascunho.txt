@@ -1,5 +1,5 @@
 --
-    Eis algumas ideais de como implementar o jogo da velha em Javascript.
+    Eis algumas ideias de como implementar o jogo da velha em Javascript.
 
     Assim como está no .html modelo, podemos dividir a área de jogo em 9 espaços.
 
