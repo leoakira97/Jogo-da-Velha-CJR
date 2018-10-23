@@ -1,67 +1,120 @@
-var A1=0, A2=0, A3=0, B1=0, B2=0, B3=0, C1=0, C2=0, C3=0;
-var row_a, row_b, row_c, col_1, col_2, col_3, dia_p, dia_s;
+/** Matriz bidimensional para armazenar valores de cada célula e nome identificador */
+/** Valor 0: célula vazia; Valor 1: célula com 'X'; Valor -1: célula com 'O'. */
+var cells = [
+    [
+        { "name": "a1",
+        "value": 0
+        },
+        { "name": "a2",
+        "value": 0
+        },
+        { "name": "a3",
+        "value": 0
+        }
+    ],
+    [
+        { "name": "b1",
+        "value": 0
+        },
+        { "name": "b2",
+        "value": 0
+        },
+        { "name": "b3",
+        "value": 0
+        }
+    ],
+    [
+        { "name": "c1",
+        "value": 0
+        },
+        { "name": "c2",
+        "value": 0
+        },
+        { "name": "c3",
+        "value": 0
+        }
+    ]
+];
 
-var player = 0;
+var player = 0; /** Variável que determina a qual jogador o turno pertence. Escolheu-se '0' para xis, '1' para bola. */
+var playerImg = ["images/x.png", "images/o.png"];
+var playerWin = ["'X' Wins!", "'O' Wins!"];
+
 var turnos = 0;
 
+function resetGame ()
+{
+    for (i = 0; i < 3; ++i)
+    {
+        for (j = 0; j < 3; ++j)
+        {
+            document.getElementById(cells[i][j].name).innerHTML = "";
+            cells[i][j].value = 0;
+        }
+    }
+    player = 0;
+    turnos = 0;
+}
 
+/** Quarta parte */
+function checkVictory (i, j) /** Checa se uma linha, coluna ou diagonal foi completada */
+{
+    var row = cells[i][0].value + cells[i][1].value + cells[i][2].value;
+    var col = cells[0][j].value + cells[1][j].value + cells[2][j].value;
+    var dip = cells[0][0].value + cells[1][1].value + cells[2][2].value;
+    var dis = cells[0][2].value + cells[1][1].value + cells[2][0].value;
 
-document.getElementById("a1").onclick = function () {
-    if (A1 == 0) {
-        A1 = player * (-2) + 1;
-            if (A1) {
-                this.innerHTML = "<img src='o.png'>";
-            } else {
-                this.innerHTML = "<img src='x.png'>"
+    row *= row;
+    col *= col;
+    dip *= dip;
+    dis *= dis;
+
+    if (row == 9 || col == 9 || dip == 9 || dis == 9)
+    {
+        alert(playerWin[player]);
+        resetGame();
+        return 1;
+    }
+
+    return 0;
+}
+
+/** Terceira parte */
+function updateCell (i, j) /** Atualiza a célula clicada, verifica se houve vitória ou empate e troca de jogador */
+{
+    cells[i][j].value = (-2) * player + 1;
+    var thisCell = document.getElementById(cells[i][j].name);
+    thisCell.innerHTML = "<img src='" + playerImg[player] + "'>";
+    ++turnos;
+
+    if (checkVictory(i, j))
+        return;
+    
+    if (turnos === 9) {
+        alert("Deu Velha!!");
+        resetGame();
+        return;
+    }
+
+    player = player * (-1) + 1;
+}
+
+/** Segunda parte */
+function detectCell (id_name) /** Busca linear simples para achar a célula correspondente ao identificador recebido */
+{
+    for (i = 0; i < 3; ++i)
+    {
+        for (j = 0; j < 3; ++j) {
+            if (cells[i][j].name === id_name && cells[i][j].value === 0) {
+                updateCell(i, j);
+                return;
             }
-
-            ++turnos;
-
-            /** Condições */
-
-            row_a = A1 + A2 + A3;
-            col_1 = A1 + B1 + C1;
-            dia_p = A1 + B2 + C3;
-
-            var condition = A1 * 3;
-
-            if (row_a == conditioplayer = !player;n || col_1 == condition || dia_p == condition) {
-
-                if (A1 == 3) printa X
-                else printa O
-
-                reseta
-
-            } else if (turnos == 9) {
-                velha
-                alerta
-                reseta
-            }
-
-        player = !player;   
+        }
     }
 }
 
-document.getElementById("a2").onclick = function () {
-}
-
-document.getElementById("a3").onclick = function () {
-}
-
-document.getElementById("b1").onclick = function () {
-}
-
-document.getElementById("b2").onclick = function () {
-}
-
-document.getElementById("b3").onclick = function () {
-}
-
-document.getElementById("c1").onclick = function () {
-}
-
-document.getElementById("c2").onclick = function () {
-}
-
-document.getElementById("c3").onclick = function () {
-}
+/** Primeira parte */
+document.addEventListener("click", function(e) { /** Envia o identificador para a função, para determinar se é uma célula */
+    e = e;
+    detectCell(e.target.id);
+});
