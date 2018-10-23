@@ -40,7 +40,7 @@ var player = 0; /** Variável que determina a qual jogador o turno pertence. Esc
 var playerImg = ["images/x.png", "images/o.png"];
 var playerWin = ["'X' Wins!", "'O' Wins!"];
 
-var turnos = 0;
+var turn = 0;
 
 function resetGame ()
 {
@@ -53,7 +53,7 @@ function resetGame ()
         }
     }
     player = 0;
-    turnos = 0;
+    turn = 0;
 }
 
 /** Quarta parte */
@@ -85,12 +85,12 @@ function updateCell (i, j) /** Atualiza a célula clicada, verifica se houve vit
     cells[i][j].value = (-2) * player + 1;
     var thisCell = document.getElementById(cells[i][j].name);
     thisCell.innerHTML = "<img src='" + playerImg[player] + "'>";
-    ++turnos;
+    ++turn;
 
     if (checkVictory(i, j))
         return;
     
-    if (turnos === 9) {
+    if (turn === 9) {
         alert("Deu Velha!!");
         resetGame();
         return;
