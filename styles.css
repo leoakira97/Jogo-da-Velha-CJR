@@ -2,11 +2,85 @@
     width:100%;
 }
 
+<<<<<<< HEAD
 .center {
     padding-top: 100px;
     margin: auto;
     width: 38%;
 
+=======
+.tabela {
+    display: flex;
+    justify-content: space-between;
+    margin: 100px;
+    margin-top: 50px;
+    width: 77%;
+}
+
+.icono {
+    background-image: url("images/o.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+}
+.iconx {
+    background-image: url("images/x.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+}
+
+.iconturn {
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+}
+
+.placarL {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.placarM {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.placarR {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.center {
+    margin: auto;
+    width: 38%;
+}
+
+.resetBtn {
+    position: relative;
+    left: 600px;
+    top: 50px;
+    background-color: #B00000;
+    border: solid #CCCCCC 2px;
+    border-radius: 5px;
+    color: white;
+    padding: 11px 33px 11px 33px;
+}
+
+.resetBtn:hover {
+    background-color: #F00000;
+    cursor: pointer;
+}
+
+.resetBtn:active {
+    background-color: #800000;
+>>>>>>> leo
 }
 
 img{
