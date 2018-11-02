@@ -2,8 +2,55 @@
     width:100%;
 }
 
+.tabela {
+    display: flex;
+    justify-content: space-between;
+    margin: 100px;
+    margin-top: 50px;
+    width: 77%;
+}
+
+.icono {
+    background-image: url("images/o.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+}
+.iconx {
+    background-image: url("images/x.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+}
+
+.iconturn {
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+}
+
+.placarL {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.placarM {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.placarR {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
 .center {
-    padding-top: 100px;
     margin: auto;
     width: 38%;
 }
