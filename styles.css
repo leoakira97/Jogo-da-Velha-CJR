@@ -2,13 +2,6 @@
     width:100%;
 }
 
-<<<<<<< HEAD
-.center {
-    padding-top: 100px;
-    margin: auto;
-    width: 38%;
-
-=======
 .tabela {
     display: flex;
     justify-content: space-between;
@@ -80,7 +73,6 @@
 
 .resetBtn:active {
     background-color: #800000;
->>>>>>> leo
 }
 
 img{
