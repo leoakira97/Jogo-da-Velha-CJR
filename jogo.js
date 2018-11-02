@@ -69,6 +69,12 @@ function botaoReset() { /** Funcao do botao de reset que apenas reinicia o turno
     else {
         player = 1;
     }
+    if(player == 0) { /** Atualizando aviso de quem possui o turno no placar */
+        document.getElementById("iconvez").style.backgroundImage = "url('images/x.png')";
+    }
+    else {
+        document.getElementById("iconvez").style.backgroundImage = "url('images/o.png')";
+    }
 }
 
 
